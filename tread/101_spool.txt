@@ -1,0 +1,93 @@
+login as: aster
+Using keyboard-interactive authentication.
+Password:
+Access denied
+Using keyboard-interactive authentication.
+Password:
+Last login: Mon Dec 21 01:22:24 2015 from 192.168.100.1
+aster@aster-queen:~> cd workspace/
+aster@aster-queen:~/workspace> ll
+total 974660
+-rw-r--r-- 1 aster users      7887 Dec 10 23:05 CMPL.txt
+-rw-r--r-- 1 aster users 803961895 Nov 19 04:55 FLAT_CMPL.txt
+-rw-r--r-- 1 aster users 193066356 Nov 20 01:24 FLAT_CMPL.zip
+-rw-r--r-- 1 aster users       434 Dec 21 01:36 kt1
+-rw------- 1 aster users        87 Dec 21 01:25 nohup.out
+-rw-r--r-- 1 aster users      1547 Dec 10 23:05 pos_tags.csv
+-rwxrwxrwx 1 aster users       117 Dec 21 01:24 spoolfile.sh
+-rwxrwxrwx 1 aster users        63 Dec 21 01:28 spool.sh
+-rw-r--r-- 1 aster users       563 Dec 10 23:05 tread_mapping.csv
+aster@aster-queen:~/workspace> dos2unix FLAT_CMPL.txt
+dos2unix: converting file FLAT_CMPL.txt to UNIX format ...
+aster@aster-queen:~/workspace> cat FLAT_CMPL.txt | sed -e 's/\t/|/g'  > FLAT_CMPL_PIPED.txt
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-label nhtsa_err car_complaints.nhtsa_cmpl FLAT_CMPL_PIPED.txt -D '|'
+Loading tuples using node 'localhost'.
+Statistics for table: car_complaints.nhtsa_cmpl with label nhtsa_err
+        Total Tuples:    1238932
+        Loaded Tuples:   1231181
+        Malformed Tuples:7751
+1231181 tuples were successfully loaded into table 'car_complaints.nhtsa_cmpl'.
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-discard-errors --skip-rows 1 -c car_complaints.nhtsa_category_mapping tread_mapping.csv
+Loading tuples using node 'localhost'.
+21 tuples were successfully loaded into table 'car_complaints.nhtsa_category_mapping'.
+aster@aster-queen:~/workspace>
+--
+
+login as: aster
+Using keyboard-interactive authentication.
+Password:
+Access denied
+Using keyboard-interactive authentication.
+Password:
+Last login: Mon Dec 21 01:22:24 2015 from 192.168.100.1
+aster@aster-queen:~> cd workspace/
+aster@aster-queen:~/workspace> ll
+total 974660
+-rw-r--r-- 1 aster users      7887 Dec 10 23:05 CMPL.txt
+-rw-r--r-- 1 aster users 803961895 Nov 19 04:55 FLAT_CMPL.txt
+-rw-r--r-- 1 aster users 193066356 Nov 20 01:24 FLAT_CMPL.zip
+-rw-r--r-- 1 aster users       434 Dec 21 01:36 kt1
+-rw------- 1 aster users        87 Dec 21 01:25 nohup.out
+-rw-r--r-- 1 aster users      1547 Dec 10 23:05 pos_tags.csv
+-rwxrwxrwx 1 aster users       117 Dec 21 01:24 spoolfile.sh
+-rwxrwxrwx 1 aster users        63 Dec 21 01:28 spool.sh
+-rw-r--r-- 1 aster users       563 Dec 10 23:05 tread_mapping.csv
+aster@aster-queen:~/workspace> dos2unix FLAT_CMPL.txt
+dos2unix: converting file FLAT_CMPL.txt to UNIX format ...
+aster@aster-queen:~/workspace> cat FLAT_CMPL.txt | sed -e 's/\t/|/g'  > FLAT_CMPL_PIPED.txt
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-label nhtsa_err car_complaints.nhtsa_cmpl FLAT_CMPL_PIPED.txt -D '|'
+Loading tuples using node 'localhost'.
+Statistics for table: car_complaints.nhtsa_cmpl with label nhtsa_err
+        Total Tuples:    1238932
+        Loaded Tuples:   1231181
+        Malformed Tuples:7751
+1231181 tuples were successfully loaded into table 'car_complaints.nhtsa_cmpl'.
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-discard-errors --skip-rows 1 -c car_complaints.nhtsa_category_mapping tread_mapping.csv
+Loading tuples using node 'localhost'.
+21 tuples were successfully loaded into table 'car_complaints.nhtsa_category_mapping'.
+aster@aster-queen:~/workspace> cl
+clear                        clockdiff
+clients-odbc-linux64.tar.gz  clusterdb
+aster@aster-queen:~/workspace> clear
+aster@aster-queen:~/workspace> cat FLAT_CMPL.txt | sed -e 's/\t/|/g'  > FLAT_CMPL_PIPED.txt
+aster@aster-queen:~/workspace> ncluster_loader -U ts186045 -w ts186045 -d beehive --el-enabled --el-label nhtsa_err2 car_complaints.nhtsa_cmpl FLAT_CMPL_PIPED.txt -D '|'
+Failed to connect to the queen database or to retrieve loader information. Will use the queen node.
+Loading tuples using node 'localhost'.
+ERROR: Invalid user name and/or password
+Exit code: 5
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-label nhtsa_err2 car_complaints.nhtsa_cmpl FLAT_CMPL_PIPED.txt -D '|'
+Loading tuples using node 'localhost'.
+Statistics for table: car_complaints.nhtsa_cmpl with label nhtsa_err2
+        Total Tuples:    1238932
+        Loaded Tuples:   1231181
+        Malformed Tuples:7751
+1231181 tuples were successfully loaded into table 'car_complaints.nhtsa_cmpl'.
+aster@aster-queen:~/workspace> wc -l FLAT_CMPL_PIPED.txt
+1238932 FLAT_CMPL_PIPED.txt
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-discard-errors --skip-rows 1 -c car_complaints.pos_tags pos_tags.csv
+Loading tuples using node 'localhost'.
+36 tuples were successfully loaded into table 'car_complaints.pos_tags'.
+aster@aster-queen:~/workspace> ncluster_loader -U beehive -w beehive -d beehive --el-enabled --el-discard-errors --skip-rows 1 -c car_complaints.nhtsa_category_mapping tread_mapping.csv
+Loading tuples using node 'localhost'.
+21 tuples were successfully loaded into table 'car_complaints.nhtsa_category_mapping'.
+aster@aster-queen:~/workspace>
